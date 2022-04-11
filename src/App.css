@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+.card:hover{
+  cursor: pointer;
+}
+
+.card:hover .card-text{
+
+
+   transform: translateX(0%);
+   
+
+}
+
+.card-text{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  padding: 1rem;
+  transform: translateX(100%);
+  z-index: 1;
+  transition: transform 0.7s ease-in-out;
+  text-align: left;
+
+
+}
