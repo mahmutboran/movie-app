@@ -1,68 +1,68 @@
-import { useFormik } from "formik";
-import {
-  Box,
-  Button,
-  Checkbox,
-  Flex,
-  FormControl,
-  FormLabel,
-  Input,
-  VStack
-} from "@chakra-ui/react";
+import React, { useState ,useContext} from "react";
+import { useNavigate } from "react-router-dom";
+import { signIn } from "../auth/firebase";
+import { AuthContext } from "../context/AuthContext";
+const Login = () => {
+  const {setUser} = useContext(AuthContext)
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
-export default function App() {
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-      rememberMe: false
-    },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    }
-  });
-  return (
-    <Flex bg="gray.100" align="center" justify="center" h="100vh">
-      <Box bg="white" p={6} rounded="md">
-        <form onSubmit={formik.handleSubmit}>
-          <VStack spacing={4} align="flex-start">
-            <FormControl>
-              <FormLabel htmlFor="email">Email Address</FormLabel>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                variant="filled"
-                onChange={formik.handleChange}
-                value={formik.values.email}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="password">Password</FormLabel>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                variant="filled"
-                onChange={formik.handleChange}
-                value={formik.values.password}
-              />
-            </FormControl>
-            <Checkbox
-              id="rememberMe"
-              name="rememberMe"
-              onChange={formik.handleChange}
-              isChecked={formik.values.rememberMe}
-              colorScheme="purple"
-            >
-              Remember me?
-            </Checkbox>
-            <Button type="submit" colorScheme="purple" isFullWidth>
-              Login
-            </Button>
-          </VStack>
-        </form>
-      </Box>
-    </Flex>
-  );
-}
+  const navigate = useNavigate()
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    signIn(email, password, navigate)
+    setUser()
+    console.log(email, password);
+  }
+  return (<div className="d-flex justify-content-center">
+    <div className="form-image">
+      <img src={"https://picsum.photos/800/800"} alt="sample-movie" />
+    </div>
+    <div className="register-form">
+      <h1 className="form-title display-3">Login</h1>
+      <form id="register" onSubmit={handleSubmit}>
+
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email
+          </label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            placeholder="Enter your email adress.."
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            placeholder="Enter your password.."
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <input
+          // type="button"
+          type="submit"
+          className="btn btn-primary form-control"
+          value="Login"
+        // onClick={handleSubmit}
+        />
+
+      </form>
+        <button className="btn btn-primary form-control" >Continue with Google</button>
+    </div>
+  </div>
+  )
+};
+
+export default Login;

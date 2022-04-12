@@ -1,11 +1,21 @@
 import './App.css';
+import { UserProvider} from './context/AuthContext';
 import Router from './router/Router';
+
+
 
 function App() {
   return (
-    <div className="App">
+
+    <UserProvider>
+
+
       <Router />
-    </div>
+    </UserProvider>
+ 
+ 
+ 
+      
   );
 }
 

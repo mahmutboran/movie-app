@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
 
-import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
-const API_KEY = "3ae99fcb249d40519289af2feb3212b9";
 
-const MovieCard = ({filterText}) => {
-  const [movies, setMovies] = useState([]);
+const MovieCard = ({item}) => {
 
-console.log(filterText?.length);
+const navigate = useNavigate()
 
-
+//!Learn
 // const [overview, setOverview] = useState({
 //   position: "absolute",
 //   bottom: 0,
@@ -20,26 +17,10 @@ console.log(filterText?.length);
 //   transform: "translateX(100%)",
 //   zIndex: 1,
 //   transition: "transform 0.7s ease-in-out",
-
-  
 // })
 
-  const fetchApi = async () => {
-    const data = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`
-    );
 
-    const fiterMovies = await axios.get(
-      ` https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${filterText}`
-    )
-;
-  setMovies(filterText?.length>0 ?fiterMovies.data.results :data.data.results )
- 
-    //setMovies(((fiterMovies.data.results.length>0 && filterText===undefined) || filterText ==="" ) ? data.data.results :fiterMovies.data.results);
- 
-  };
-
-
+//!Learn
 //   const handleMouseOver = (e) => {
 //     console.log(e);
 // movies.map((item)=>(
@@ -47,17 +28,13 @@ console.log(filterText?.length);
 // ))
 //  };
   
-  useEffect(() => {
-    fetchApi();
-  }, [filterText]);
 
   return (
-    <div className="d-flex row justify-content-between gap-3 p-3 bg-light" >
-      {movies.map((item) => (
-        <div
+          <div 
           key={item.id}
           className="card position-relative m-3 p-0 "
           style={{ width: " 18rem" ,overflow: "hidden"}}
+          onClick={()=>navigate(`/moviedetail/${item.id}`)}
           //onMouseOver={()=>handleMouseOver(item.id)}
         >
           <img
@@ -77,8 +54,7 @@ console.log(filterText?.length);
           </div>
           <p className="card-text " style={{fontSize:".9rem"}}> <span className="fs-4 d-block">Overview:</span>  {item.overview}</p>
         </div>
-      ))}
-    </div>
+  
   );
 };
 

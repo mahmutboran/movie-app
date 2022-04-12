@@ -1,33 +1,22 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MovieCard from "../components/MovieCard";
+
 import Navbar from "../components/Navbar";
 import Login from "../pages/Login";
-import { useState } from "react";
+
 import Register from "../pages/Register";
-
-
+import Main from "../pages/Main";
+import MovieDetail from "../pages/MovieDetail";
 
 const Router = () => {
-
-  const [filterText, setFilterText] = useState()
-
-
-  const onSearch = (e)=>{
-    setFilterText(e.target.value)
-  }
-
-  
-
-
-
   return (
     <BrowserRouter>
-      <Navbar onSearch={onSearch} filter={filterText}/>
+      <Navbar  />
       <Routes>
-        <Route path="/" element={<MovieCard filterText={filterText}/>} />
+        <Route path="/" element={<Main />} />
         <Route path="/login" element={ <Login/> } />
         <Route path="/register" element={ <Register/> } />
+        <Route path="/moviedetail/:id" element={ <MovieDetail/> } />
       </Routes>
     </BrowserRouter>
   );
