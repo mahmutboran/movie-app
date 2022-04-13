@@ -1,10 +1,14 @@
-import React, {  useContext, useState } from "react";
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createUser } from "../auth/firebase";
-import { AuthContext } from "../context/AuthContext";
+import { createUser, googleLogin } from "../auth/firebase";
+
+
+
 
 const Register = () => {
-   const {setUser} = useContext(AuthContext)
+
+ 
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -13,16 +17,16 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    createUser(email, password, navigate);
-    setUser(`${firstName} ${lastName}`)
-
-    console.log(firstName, lastName, email, password);
+    const displayName = `${firstName} ${lastName}`;
+    createUser(email, password, navigate,displayName);
+    console.log(firstName, lastName, email, password,displayName);
   };
 
-  // const registerGoogle = () =>{
-  //   auth.signInWithPopup(provider)
-  // }
+  const handleGoogle = () =>{
+    googleLogin(navigate)
+ 
+  }
+
   return (
     <div className="d-flex justify-content-center">
       <div className="form-image">
@@ -91,7 +95,8 @@ const Register = () => {
             // onClick={handleSubmit}
           />
         </form>
-        <button className="btn btn-primary form-control" >
+        <button className="btn btn-primary form-control" 
+       onClick={handleGoogle}>
           Continue with Google
         </button>
       </div>

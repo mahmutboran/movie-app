@@ -1,21 +1,24 @@
-import React, { useState ,useContext} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signIn } from "../auth/firebase";
-import { AuthContext } from "../context/AuthContext";
+import {  googleLogin, signIn } from "../auth/firebase";
+
 const Login = () => {
-  const {setUser} = useContext(AuthContext)
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     signIn(email, password, navigate)
-    setUser()
     console.log(email, password);
   }
+
+  const handleGoogle = () =>{
+    googleLogin(navigate)
+ 
+  }
+
   return (<div className="d-flex justify-content-center">
     <div className="form-image">
       <img src={"https://picsum.photos/800/800"} alt="sample-movie" />
@@ -59,7 +62,7 @@ const Login = () => {
         />
 
       </form>
-        <button className="btn btn-primary form-control" >Continue with Google</button>
+        <button className="btn btn-primary form-control" onClick={handleGoogle} >Continue with Google</button>
     </div>
   </div>
   )

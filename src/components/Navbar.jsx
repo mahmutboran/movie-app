@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { logOut } from '../auth/firebase';
 
 const Navbar = () => {
-  const { onSearch, user ,setUser} = useContext(AuthContext);
+  const { onSearch, user } = useContext(AuthContext);
 
   return (
     <div>
@@ -14,11 +15,11 @@ const Navbar = () => {
           </a>
 
           <div className="d-flex text-white align-item-center" >
-          {user?.length>0 ? <h5 className="m-2 text-capitalize">{user}</h5> :
+          {user ? <h5 className="m-2 text-capitalize" >{user.displayName}</h5> :
             <NavLink className="btn btn-outline-light mx-3" to="/login">
               Login
             </NavLink>}
-            {user?.length>0 ?   <NavLink className="btn btn-outline-light" to="/" onClick={()=>setUser()} >
+            {user ?   <NavLink className="btn btn-outline-light" to="/" onClick={()=>logOut()} >
               Logout
             </NavLink>:
             <NavLink className="btn btn-outline-light" to="/register">
