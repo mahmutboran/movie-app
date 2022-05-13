@@ -22,7 +22,7 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
-
+console.log(auth)
 
 
 export const createUser = async (email, password, navigate) => {

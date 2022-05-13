@@ -16,7 +16,6 @@ const Login = () => {
 
   const handleGoogle = () =>{
     googleLogin(navigate)
- 
   }
 
   return (<div className="d-flex justify-content-center">
@@ -60,7 +59,6 @@ const Login = () => {
           value="Login"
         // onClick={handleSubmit}
         />
-
       </form>
         <button className="btn btn-primary form-control" onClick={handleGoogle} >Continue with Google</button>
     </div>

@@ -3,12 +3,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUser, googleLogin } from "../auth/firebase";
 
-
-
-
 const Register = () => {
 
- 
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -24,7 +20,6 @@ const Register = () => {
 
   const handleGoogle = () =>{
     googleLogin(navigate)
- 
   }
 
   return (

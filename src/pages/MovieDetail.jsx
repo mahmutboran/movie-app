@@ -14,7 +14,6 @@ const MovieDetail = () => {
     const details = await axios.get(
       `https://api.themoviedb.org/3/movie/${params.id}?api_key=${API_KEY}`
     );
-
     setItem(details?.data);
   };
 
@@ -46,8 +45,6 @@ const MovieDetail = () => {
       </div>
   
       <a href={item?.homepage} target="_blank"> Home Page</a>
-
-   
 
       <button className="btn btn-primary" onClick={() => navigate(-1)}>
         Prev Page

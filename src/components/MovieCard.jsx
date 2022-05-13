@@ -2,9 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
-
 const MovieCard = ({item}) => {
-
 const navigate = useNavigate()
 
 //!Learn
@@ -27,7 +25,6 @@ const navigate = useNavigate()
 //  item.id===e  && setOverview({...overview , transform : "translateY(0%)"})
 // ))
 //  };
-  
 
   return (
           <div 
